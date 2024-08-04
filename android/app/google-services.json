@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "944944331732",
+    "project_id": "clone-re",
+    "storage_bucket": "clone-re.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:944944331732:android:0cedc30d995e0012c6f441",
+        "android_client_info": {
+          "package_name": "com.example.flutter_meal_planner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "944944331732-ojbhbmk1575kjoiu2ubfv0bc5crf0btr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.flutter_meal_planner",
+            "certificate_hash": "4997a5ca2d21699829c4cfa02a6f655b6bfeee7b"
+          }
+        },
+        {
+          "client_id": "944944331732-8607bd0au4u84s1uj33leak15r2c1fb6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmGBAFIWg1G6ApFIdKY-IOl3NS5sRytlw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "944944331732-8607bd0au4u84s1uj33leak15r2c1fb6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "944944331732-e5h5j7kciok43ei3lpvahuho0o0g6of8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.flutterMealPlanner"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
