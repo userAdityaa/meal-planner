@@ -40,6 +40,7 @@ class ChatRepository {
       final chat =
           ChatModel(id: chatID, participants: [uid1, uid2], messages: []);
       await _chats.doc(chatID).set(chat.toMap());
+      return;
     } on FirebaseException catch (e) {
       throw e.message!;
     } catch (e) {

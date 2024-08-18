@@ -65,5 +65,9 @@
     </dict>
     <key>NSPhotoLibraryUsageDescription</key>
     <string>We need access to your photo library to upload images.</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>This app needs access to location when open.</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>This app needs access to location when in the background.</string>
 </dict>
 </plist>

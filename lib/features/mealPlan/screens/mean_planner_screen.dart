@@ -107,10 +107,11 @@ class _MealPlannerScreenState extends ConsumerState<MealPlannerScreen> {
   void searchMeals(
       String searchText, String diet, String allergy, String mealType) async {
     if (searchText != "") {
-      var url = Uri.parse(
-          'https://api.edamam.com/api/recipes/v2?type=public&q=$searchText&app_id=6dd76169&app_key=%20261cac5cc9785821525536c1c5d7382c$diet$allergy$mealType');
-      var response = await http.get(url);
+      // var url = Uri.parse(
+      //     'https://api.edamam.com/api/recipes/v2?type=public&q=$searchText&app_id=6dd76169&app_key=%20261cac5cc9785821525536c1c5d7382c$diet$allergy$mealType');
+      // var response = await http.get(url);
 
+      var response;
       if (response.statusCode == 200) {
         var jsonResponse = jsonDecode(response.body);
         List<dynamic> hits = jsonResponse['hits'];

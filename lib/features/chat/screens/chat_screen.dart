@@ -61,6 +61,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                       onTap: () {
                         ref.watch(chatControllerProvider.notifier).createChat(
                             ref.watch(userProvider)!.uid, user['uid']);
+                        print("User id: " + user['uid']);
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) =>
                                 ConversationPage(personalChat: user)));

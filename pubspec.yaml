@@ -46,6 +46,10 @@ dependencies:
   http: ^1.1.0
   dash_chat_2: ^0.0.20
   image_picker: ^1.0.8
+  web_socket_channel: ^2.4.0
+  geolocator: ^11.1.0
+  geocoding: ^3.0.0
+  openfoodfacts: ^3.8.0
 
 dev_dependencies:
   flutter_test:

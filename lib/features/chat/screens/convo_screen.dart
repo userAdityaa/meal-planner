@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'dart:io';
+import 'package:http/http.dart' as http;
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dash_chat_2/dash_chat_2.dart';
@@ -30,6 +32,7 @@ class _ConversationPageState extends ConsumerState<ConversationPage> {
         firstName: ref.read(userProvider)!.name);
     otherUser = ChatUser(
         id: widget.personalChat['uid'], firstName: widget.personalChat['name']);
+    // print(otherUser!.firstName);
   }
 
   @override
@@ -63,7 +66,7 @@ class _ConversationPageState extends ConsumerState<ConversationPage> {
                 ChatModel? chat = snapshot.data as ChatModel?;
                 List<ChatMessage> messages = [];
                 if (chat != null && chat.messages != null) {
-                  messages = _generateChatMessagesList(chat.messages!);
+                  messages = _generateChatMessagesList(chat.messages);
                 }
                 return DashChat(
                   messageOptions: const MessageOptions(
@@ -85,7 +88,11 @@ class _ConversationPageState extends ConsumerState<ConversationPage> {
   }
 
   Future<void> _sendMessages(ChatMessage chatMessage) async {
-    MessageModel message = MessageModel(
+    String AIChat = "";
+    bool isAIResponseReceived = false;
+
+    // Send the user's message
+    MessageModel userMessage = MessageModel(
       senderID: currentUser!.id,
       content: chatMessage.text,
       type:
@@ -96,8 +103,95 @@ class _ConversationPageState extends ConsumerState<ConversationPage> {
 
     await ref
         .read(chatControllerProvider.notifier)
-        .sendChatMessages(currentUser!.id, otherUser!.id, message);
+        .sendChatMessages(currentUser!.id, otherUser!.id, userMessage);
+
+    if (otherUser!.firstName == 'container') {
+      final uri = Uri.parse('http://localhost:8000/chatUser');
+      final response = await http.post(uri,
+          headers: {'Content-Type': 'application/json'},
+          body: jsonEncode({'message': chatMessage.text}));
+
+      if (response.statusCode == 200) {
+        final responseBody = jsonDecode(response.body);
+        AIChat = responseBody['fulfillmentText'];
+        isAIResponseReceived = true;
+        print("AI Response Success: $AIChat");
+      } else {
+        print('Failed to send message to the server: ${response.body}');
+      }
+    }
+
+    // If the AI response was received, add it to the chat
+    if (isAIResponseReceived) {
+      MessageModel aiMessage = MessageModel(
+        senderID: otherUser!.id,
+        content: AIChat,
+        type: MessageType.Text.toString()
+            .split('.')
+            .last, // Convert enum to string
+        sentAt: Timestamp.fromDate(
+            DateTime.now()), // Use current time for AI response
+      );
+
+      await ref
+          .read(chatControllerProvider.notifier)
+          .sendChatMessages(currentUser!.id, otherUser!.id, aiMessage);
+    }
   }
+
+  // Future<void> _sendMessages(ChatMessage chatMessage) async {
+  //   String AIChat = "";
+  //   if (otherUser!.firstName == 'container') {
+  //     final uri = Uri.parse('http://localhost:8000/chatUser');
+  //     final response = await http.post(uri,
+  //         headers: {'Content-Type': 'application/json'},
+  //         body: jsonEncode({'message': chatMessage.text}));
+  //     if (response.statusCode == 200) {
+  //       // AIChat = response.body;
+  //       // print("Success");
+  //       final responseBody = jsonDecode(response.body);
+
+  //       // Extract the `fulfillmentText`
+  //       AIChat = responseBody['fulfillmentText'];
+
+  //       // Use the `fulfillmentText` as needed
+  //       // print('Fulfillment Text: $fulfillmentText');
+  //       print("Sucess");
+  //     } else {
+  //       print('Failed to send message to the server: ${response.body}');
+  //     }
+  //   }
+  //   MessageModel message = MessageModel(
+  //     senderID: currentUser!.id,
+  //     content: chatMessage.text,
+  //     type:
+  //         MessageType.Text.toString().split('.').last, // Convert enum to string
+  //     sentAt: Timestamp.fromDate(
+  //         chatMessage.createdAt), // Convert DateTime to Timestamp
+  //   );
+
+  //   print(message);
+
+  //   await ref
+  //       .read(chatControllerProvider.notifier)
+  //       .sendChatMessages(currentUser!.id, otherUser!.id, message);
+
+  //   if (AIChat.isNotEmpty) {
+  //     MessageModel aiMessage = MessageModel(
+  //       senderID: otherUser!.id,
+  //       content: AIChat,
+  //       type: MessageType.Text.toString()
+  //           .split('.')
+  //           .last, // Convert enum to string
+  //       sentAt: Timestamp.fromDate(chatMessage.createdAt),
+  //     );
+
+  //     // Add the AI message to the chat
+  //     await ref
+  //         .read(chatControllerProvider.notifier)
+  //         .sendChatMessages(currentUser!.id, otherUser!.id, aiMessage);
+  //   }
+  // }
 
   List<ChatMessage> _generateChatMessagesList(List<MessageModel> messages) {
     List<ChatMessage> chatMessages = messages

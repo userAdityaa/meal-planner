@@ -60,21 +60,26 @@ class HomePage extends ConsumerWidget {
                   ],
                 ),
               ),
-              const Column(
-                children: [
-                  Icon(
-                    Icons.local_grocery_store_sharp,
-                    size: 38,
-                  ),
-                  SizedBox(height: 5),
-                  Text(
-                    'Grocery List',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
+              GestureDetector(
+                onTap: () => {
+                  Routemaster.of(context).push('/grocery-list'),
+                },
+                child: const Column(
+                  children: [
+                    Icon(
+                      Icons.local_grocery_store_sharp,
+                      size: 38,
                     ),
-                  )
-                ],
+                    SizedBox(height: 5),
+                    Text(
+                      'Grocery List',
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )
+                  ],
+                ),
               ),
               GestureDetector(
                 onTap: () => {
