@@ -21,5 +21,16 @@ samples, guidance on mobile development, and a full API reference.
 ### Ingredients Selection and Allergy Selection
 <img src="https://github.com/user-attachments/assets/9cf95516-3adb-4748-9352-2845b5216cc8" alt="Login Page" width="200" />
 
+### Discover Recipes and Explore Ingredients Using Powerful API Integrations
+|Discover Recipes|Explore Ingredients|
+|----|----|
+|<img src="https://github.com/user-attachments/assets/eec6ab84-6264-4d4b-b3b7-59f0921126b0" alt="Login Page" width="200" />|<img src="https://github.com/user-attachments/assets/b3acf700-42bf-4d3e-8d1f-806ac349c661" alt="Login Page" width="200" />|
+
+
+
+
+
+
+
 
 
