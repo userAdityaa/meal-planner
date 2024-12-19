@@ -27,6 +27,14 @@ samples, guidance on mobile development, and a full API reference.
 |<img src="https://github.com/user-attachments/assets/eec6ab84-6264-4d4b-b3b7-59f0921126b0" alt="Login Page" width="200" />|<img src="https://github.com/user-attachments/assets/b3acf700-42bf-4d3e-8d1f-806ac349c661" alt="Login Page" width="200" />|
 
 
+### Ingredients for Preparation
+<img src="https://github.com/user-attachments/assets/00eb85a5-c3e3-4e9e-91ee-74b0f6878ebb" alt="Login Page" width="200" />
+
+### Machine Learning (Food Prediction)
+<img src="https://github.com/user-attachments/assets/326c318a-4e5f-4fc3-809e-95492247041d" alt="Login Page" width="200" />
+
+
+
 
 
 
